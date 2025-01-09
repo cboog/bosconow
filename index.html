@@ -6,7 +6,6 @@
   <title>Campus Event Map</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
-  <script src="js/scripts.js" defer></script>
 </head>
 <body class="bg-gray-100">
 
@@ -26,7 +25,11 @@
     
     <!-- Campus Map -->
     <div class="relative">
-      <img src="assets/campus-map.jpg" alt="Campus Map" class="w-full h-auto rounded-lg shadow-lg">
+      <img 
+        id="campus-map" 
+        src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1661938386/bosco/gj9ncox3wdkzh3cbmn6m/Campus-MAP.jpg" <!-- Replace "assets/campus-map.jpg" with your desired URL -->
+        alt="Campus Map" 
+        class="w-full h-auto rounded-lg shadow-lg">
       <!-- Event Markers (Example) -->
       <button 
         class="absolute top-[20%] left-[40%] bg-red-500 rounded-full p-2"
@@ -68,5 +71,19 @@
     </div>
   </div>
 
+  <script>
+    // Placeholder functions for modal
+    function openAddEventModal() {
+      document.getElementById('add-event-modal').classList.remove('hidden');
+    }
+
+    function closeAddEventModal() {
+      document.getElementById('add-event-modal').classList.add('hidden');
+    }
+
+    function showEventDetails(eventName, eventTime) {
+      alert(`${eventName}\n${eventTime}`);
+    }
+  </script>
 </body>
 </html>
