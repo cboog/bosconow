@@ -12,3 +12,13 @@ button {
 button:hover {
   opacity: 0.8;
 }
+
+/* Styling for event markers (added icons) */
+button[data-event-name] {
+  font-size: 24px;
+  transition: transform 0.2s ease;
+}
+
+button[data-event-name]:hover {
+  transform: scale(1.2);
+}
