@@ -1,89 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Campus Event Map</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Map</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-100">
-
-  <!-- Navbar -->
-  <nav class="bg-blue-600 p-4">
-    <div class="container mx-auto flex justify-between">
-      <h1 class="text-white text-lg font-bold">Campus Events</h1>
-      <div>
-        <a href="overview.html" class="text-white hover:underline">Overview</a>
-      </div>
+<body>
+    <div class="map-container">
+        <img src="campus-map.jpg" alt="Campus Map" class="map-image">
+        <!-- Interactive Circles -->
+        <div class="circle" data-location="Library" style="top: 50px; left: 100px;">1</div>
+        <div class="circle" data-location="Gym" style="top: 150px; left: 200px;">2</div>
+        <div class="circle" data-location="Cafeteria" style="top: 250px; left: 300px;">3</div>
     </div>
-  </nav>
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
 
-  <!-- Main Content -->
-  <main class="container mx-auto my-8">
-    <h2 class="text-2xl font-bold mb-4">Campus Map</h2>
-    
-    <!-- Campus Map -->
-    <div class="relative">
-      <img 
-        id="campus-map" 
-        src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1661938386/bosco/gj9ncox3wdkzh3cbmn6m/Campus-MAP.jpg" 
-        alt="Campus Map" 
-        class="w-full h-auto rounded-lg shadow-lg">
-      <!-- Event Markers (Example) -->
-      <button 
-        class="absolute top-[20%] left-[40%] bg-red-500 rounded-full p-2"
-        data-tooltip="Sports Event at Gym"
-        onclick="showEventDetails('Sports Event at Gym', '3:00 PM at Gym')">
-        🏀
-      </button>
-    </div>
-
-    <!-- Add Event Button for Admin -->
-    <div class="mt-6 text-right">
-      <button 
-        class="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-500"
-        onclick="openAddEventModal()">
-        Add Event
-      </button>
-    </div>
-  </main>
-
-  <!-- Add Event Modal (Hidden by Default) -->
-  <div id="add-event-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
-    <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
-      <h3 class="text-lg font-bold mb-4">Add Event</h3>
-      <form id="add-event-form">
-        <label for="event-name" class="block text-sm font-medium">Event Name</label>
-        <input type="text" id="event-name" class="border-gray-300 rounded-md w-full p-2 mb-4" placeholder="Enter event name" required>
-
-        <label for="event-time" class="block text-sm font-medium">Time</label>
-        <input type="text" id="event-time" class="border-gray-300 rounded-md w-full p-2 mb-4" placeholder="Enter event time" required>
-
-        <label for="event-location" class="block text-sm font-medium">Location</label>
-        <input type="text" id="event-location" class="border-gray-300 rounded-md w-full p-2 mb-4" placeholder="Enter event location" required>
-
-        <div class="flex justify-end">
-          <button type="button" class="text-gray-500 mr-4" onclick="closeAddEventModal()">Cancel</button>
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    // Placeholder functions for modal
-    function openAddEventModal() {
-      document.getElementById('add-event-modal').classList.remove('hidden');
-    }
-
-    function closeAddEventModal() {
-      document.getElementById('add-event-modal').classList.add('hidden');
-    }
-
-    function showEventDetails(eventName, eventTime) {
-      alert(`${eventName}\n${eventTime}`);
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
