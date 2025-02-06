@@ -1,26 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Campus Map</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St. John Bosco Campus Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: navy;
+      text-align: left;
+      padding: 20px;
+      margin-left: 5%;
+    }
+    .map-container {
+      position: relative;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .map-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .marker {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: navy;
+      border: 2px solid white;
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      visibility: hidden;
+    }
+    .marker[data-visible="true"] {
+      visibility: visible;
+    }
+    /* Pop-up image styles */
+    .hover-image {
+      position: absolute;
+      width: 0;
+      height: auto;
+      border: 3px solid navy;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .marker:hover .hover-image {
+      width: 200px;
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  </style>
 </head>
 <body>
-    <!-- Map Container -->
-    <div class="map-container">
-        <!-- Map Image -->
-        <img src="campus-map.jpg" alt="Campus Map" class="map-image">
-
-        <!-- Interactive Circles for Locations -->
-        <div class="circle" data-location="Library" style="top: 50px; left: 120px;">1</div>
-        <div class="circle" data-location="Gymnasium" style="top: 150px; left: 220px;">2</div>
-        <div class="circle" data-location="Cafeteria" style="top: 250px; left: 320px;">3</div>
+  <h1>St. John Bosco Campus Events</h1>
+  <div class="map-container">
+    <img src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1661938386/bosco/gj9ncox3wdkzh3cbmn6m/Campus-MAP.jpg" alt="Campus Map">
+    
+    <div class="marker" id="marker-1">
+      <img class="hover-image" src="https://www.howardcdm.com/wp-content/uploads/2020/09/IMG_5458-scaled.jpg" alt="Track & Field">
     </div>
+    <div class="marker" id="marker-2">
+      <img class="hover-image" src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1656441051/bosco/crparcmj0qrxs8sbr0vb/DSC09162-Edit.jpg" alt="Thunderdome/SJB Gym">
+    </div>
+    <div class="marker" id="marker-3">
+      <img class="hover-image" src="https://pbs.twimg.com/media/GO29Eyba4AEnP-B.jpg:large" alt="Baseball Field">
+    </div>
+    <div class="marker" id="marker-4">
+      <img class="hover-image" src="https://plae.us/wp-content/uploads/casestudies/domestic/st-johns-bosco/hero-scaled.jpg" alt="Weight Room">
+    </div>
+    <div class="marker" id="marker-5">
+      <img class="hover-image" src="https://www.aceelectricinc.com/wp-content/uploads/2021/08/Capture-3.jpg" alt="Thunderdome/SJB Gym">
+    </div>
+  </div>
 
-    <!-- Tooltip for Hover Effect -->
-    <div id="tooltip" class="tooltip"></div>
+  <script>
+    function updateMarker(markerId, xPercent, yPercent, label = "") {
+      const marker = document.getElementById(markerId);
+      if (marker) {
+        marker.style.left = `${xPercent}%`;
+        marker.style.top = `${yPercent}%`;
+        marker.setAttribute("data-label", label);
+        marker.setAttribute("data-visible", "true");
 
-    <script src="script.js"></script>
+        // Position the image above the marker
+        const img = marker.querySelector(".hover-image");
+        if (img) {
+          img.style.left = "50%";
+          img.style.top = "-150px"; // Moves image above the marker
+          img.style.transform = "translateX(-50%)";
+        }
+      } else {
+        console.error(`Marker with ID "${markerId}" not found.`);
+      }
+    }
+
+    // Update marker positions
+    updateMarker("marker-1", 34, 26, "Track & Field, Lacrosse, Soccer");
+    updateMarker("marker-2", 57, 51, "Thunderdome/SJB Gym");
+    updateMarker("marker-3", 80, 23, "Baseball Field");
+    updateMarker("marker-4", 57, 45, "Weight Room");
+    updateMarker("marker-5", 80, 80, "Panish Family Stadium");
+  </script>
 </body>
 </html>
