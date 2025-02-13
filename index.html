@@ -80,24 +80,22 @@
       z-index: 2;
     }
     .hover-image {
-  position: absolute;
-  width: 400px; /* Increase this value to make the image bigger */
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  top: -250px; /* Adjust this to position it better */
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  z-index: 3;
-}
-
-.marker:hover .hover-image {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-}
+      position: absolute;
+      width: 0;
+      height: auto;
+      border: 3px solid navy;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .marker:hover .hover-image {
+      width: 200px;
+      opacity: 1;
+      transform: scale(1.2);
+    }
     .event-text {
       position: absolute;
       top: 30px;
