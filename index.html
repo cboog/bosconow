@@ -81,23 +81,25 @@
     }
     .hover-image {
       position: absolute;
-      width: 150px;
-      display: none;
+      width: 200px; /* Increased size */
+      height: auto;
+      display: block;
       border-radius: 5px;
-      top: -170%;
+      top: -200%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) scale(0.8);
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
       z-index: 3;
     }
     .marker:hover .hover-image {
-      display: block;
       opacity: 1;
+      transform: translateX(-50%) scale(1);
     }
     .event-text {
       position: absolute;
-      top: 30px; /* Adjust the position of event text below marker */
+      top: 30px;
       left: 50%;
       transform: translateX(-50%);
       background-color: white;
