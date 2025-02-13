@@ -80,23 +80,24 @@
       z-index: 2;
     }
     .hover-image {
-      position: absolute;
-      width: 200px; /* Increased size */
-      height: auto;
-      display: block;
-      border-radius: 5px;
-      top: -200%;
-      left: 50%;
-      transform: translateX(-50%) scale(0.8);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-      z-index: 3;
-    }
-    .marker:hover .hover-image {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
+  position: absolute;
+  width: 400px; /* Increase this value to make the image bigger */
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  top: -250px; /* Adjust this to position it better */
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 3;
+}
+
+.marker:hover .hover-image {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
     .event-text {
       position: absolute;
       top: 30px;
