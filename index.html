@@ -4,11 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>St. John Bosco Campus Events</title>
+  <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" rel="stylesheet" />
   <style>
     body {
       font-family: Arial, sans-serif;
+      font-weight: bold;
       margin: 0;
       padding: 0;
+    }
+    h1 {
+      color: navy;
+      text-align: left;
+      padding: 20px;
+      margin-left: 5%;
+    }
+    .event-form {
+      background-color: #f0f0f0;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .event-form label {
+      font-size: 18px;
+      color: navy;
+    }
+    .event-form select,
+    .event-form input {
+      width: 90%;
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px 0;
+      border: 2px solid navy;
+      border-radius: 5px;
+    }
+    .event-form button {
+      width: 90%;
+      padding: 12px;
+      font-size: 20px;
+      background-color: navy;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .event-form button:hover {
+      background-color: darkblue;
     }
     .map-container {
       position: relative;
@@ -30,32 +77,108 @@
       border-radius: 50%;
       cursor: pointer;
       transform: translate(-50%, -50%);
+      z-index: 2;
     }
     .hover-image {
       position: absolute;
       width: 150px;
-      height: auto;
+      display: none;
       border-radius: 5px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-      opacity: 0;
+      top: -170%;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
       transition: opacity 0.3s ease-in-out;
+      z-index: 3;
     }
     .marker:hover .hover-image {
+      display: block;
       opacity: 1;
+    }
+    .event-text {
+      position: absolute;
+      top: 30px; /* Adjust the position of event text below marker */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      padding: 5px;
+      font-size: 12px;
+      border: 1px solid navy;
+      border-radius: 5px;
+      text-decoration: underline;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
+
+  <h1>St. John Bosco Campus Events</h1>
+
+  <div class="event-form">
+    <label for="event-location">Select Location:</label>
+    <select id="event-location">
+      <option value="marker-1">Track & Field</option>
+      <option value="marker-2">Thunderdome/SJB Gym</option>
+      <option value="marker-3">Baseball Field</option>
+      <option value="marker-4">Weight Room</option>
+      <option value="marker-5">Panish Family Stadium</option>
+      <option value="marker-6">Bosco Quad</option>
+      <option value="marker-7">SJB Aquatics Pool</option>
+      <option value="marker-8">Intramural Field</option>
+      <option value="marker-9">Chapel</option>
+      <option value="marker-10">Entrance</option>
+      <option value="marker-11">Learning Commons</option>
+    </select>
+    <input type="text" id="event-name" placeholder="Enter event name">
+    <input type="number" id="event-hour" placeholder="HH" min="1" max="12">
+    <input type="number" id="event-minute" placeholder="MM" min="0" max="59">
+    <select id="event-period">
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select>
+    <button id="add-event-button">Add Event</button>
+  </div>
+
   <div class="map-container">
     <img src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1661938386/bosco/gj9ncox3wdkzh3cbmn6m/Campus-MAP.jpg" alt="Campus Map">
-    
+
     <div class="marker" id="marker-1" style="left: 34%; top: 26%;">
       <img class="hover-image" src="https://www.howardcdm.com/wp-content/uploads/2020/09/IMG_5458-scaled.jpg" alt="Track & Field">
     </div>
     <div class="marker" id="marker-2" style="left: 57%; top: 51%;">
       <img class="hover-image" src="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1656441051/bosco/crparcmj0qrxs8sbr0vb/DSC09162-Edit.jpg" alt="Thunderdome/SJB Gym">
     </div>
-    <!-- Add additional markers here with their respective coordinates and hover images -->
+    <!-- Add other markers here -->
   </div>
+
+  <script>
+    document.getElementById("add-event-button").addEventListener("click", function() {
+      const location = document.getElementById("event-location").value;
+      const eventName = document.getElementById("event-name").value;
+      const eventHour = document.getElementById("event-hour").value.padStart(2, '0');
+      const eventMinute = document.getElementById("event-minute").value.padStart(2, '0');
+      const eventPeriod = document.getElementById("event-period").value;
+
+      if (eventName.trim() === "" || eventHour === "" || eventMinute === "") {
+        alert("Please enter all event details.");
+        return;
+      }
+
+      const eventTime = `${eventHour}:${eventMinute} ${eventPeriod}`;
+      const marker = document.getElementById(location);
+      if (!marker) {
+        alert("Invalid location selected.");
+        return;
+      }
+
+      const eventText = document.createElement("div");
+      eventText.textContent = `${eventName} - ${eventTime}`;
+      eventText.classList.add("event-text");
+
+      marker.appendChild(eventText);
+      marker.style.visibility = "visible";
+    });
+  </script>
+
 </body>
 </html>
